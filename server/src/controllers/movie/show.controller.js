@@ -95,3 +95,44 @@ export const createMovieShow = async (req, res) => {
         res.status(500).json({ message: 'Server error while creating movie show', error: error.message });
     }
 }
+
+// get all shows
+export const getShows = async (req,res) => {
+    try {
+        // const shows = await ShowModel.find({showDateTime: {$gte: new Date()}}).populate('movie').toSorted({showDateTime: 1});
+        const shows = await ShowModel.find({ showDateTime: { $gte: new Date()}}).populate('movie').sort({ showDateTime: 1 });
+
+        // console.log(shows);
+        const uniqueShows = new Set(shows.map(show => show.movie))
+        // console.log(uniqueShows);
+
+        res.status(200).json({success: true, message: 'Shows fetched successfully', data: Array.from(uniqueShows)});
+    } catch (error) {
+        res.status(500).json({ message: 'Server error while fetching shows', error: error.message });
+    }
+}
+
+//get single show
+export const getShow = async (req,res) => {
+    try {
+        const {movieId} = req.params;
+        //get all upcoming shows for the movie
+        const shows = await ShowModel.find({movie: movieId, showDateTime: {$gte: new Date()}});
+
+        const movie = await movieModel.findById(movieId);
+        const dateTime = {};
+
+        shows.forEach((show) => {
+            const date = show.showDateTime.toISOString().split('T')[0];
+            if(!dateTime[date]) {
+                dateTime[date] = [];
+            }
+            dateTime[date].push({time: show.showDateTime,showId: show._id});
+
+        });
+
+        res.status(200).json({success: true, message: 'Shows fetched successfully', movie, dateTime});
+    } catch (error) {
+        res.status(500).json({ message: 'Server error while fetching shows', error: error.message });
+    }
+}

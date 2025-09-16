@@ -7,6 +7,8 @@ import cors from 'cors'
 import connectDB from './config/db.js';
 import userRoutes from './routes/user.route.js';
 import showRoutes from './routes/movie.route.js';
+import bookingRoutes from './routes/booking.route.js';
+import adminRoutes from './routes/admin.route.js';
 
 const app = express();
 
@@ -43,6 +45,9 @@ app.use('/api/', limiter);
 ///api/v1/
 app.use('/api/v1/', userRoutes);
 app.use('/api/v1/', showRoutes);
+app.use('/api/v1/booking', bookingRoutes);
+app.use('/api/v1/admin', adminRoutes);
+
 
 app.get('/health', (req, res) => {
     res.json({
