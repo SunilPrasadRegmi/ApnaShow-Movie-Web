@@ -1,6 +1,6 @@
 
 <p align="center">
-   <img src="client/src/assets/logo.png" alt="ApnaShow Logo" width="120" />
+   <img src="client/src/assets/nameLogo.svg" alt="ApnaShow Logo" width="120" />
 </p>
 
 # ApnaShow Movie Web
@@ -8,11 +8,11 @@
 A modern movie web application built with React and Vite. This project allows users to browse movies, view trailers, book seats, and manage favorites.
 
 <p align="center">
-   <img src="client/src/assets/hero.jpg" alt="Hero Banner" width="400" />
+   <img src="client/src/assets/backgroundImage.png" alt="Hero Banner" width="400" />
 </p>
 
 <p align="center">
-   <img src="client/src/assets/screenImage.svg" alt="App Screenshot" width="400" />
+   <img src="client/src/assets/homeBack.png" alt="App Screenshot" width="400" />
 </p>
 
 ## Features
@@ -79,15 +79,16 @@ This project is licensed under the MIT License.
 
 Below are all PNG images used in the project (located in `client/src/assets/`):
 
-```
-homeBack.png
-bookingBack.png
-movieDBack.png
-moviedetilsBack.png
-SignUp.png
-SeatBack.png
-footerBack.png
-```
+
+<p align="center">
+   <img src="client/src/assets/homeBack.png" alt="Home Background" width="300" />
+   <img src="client/src/assets/bookingBack.png" alt="Booking Background" width="300" />
+   <img src="client/src/assets/movieDBack.png" alt="Movie Details Background" width="300" />
+   <img src="client/src/assets/moviedetilsBack.png" alt="Movie Details Back" width="300" />
+   <img src="client/src/assets/SignUp.png" alt="Sign Up" width="300" />
+   <img src="client/src/assets/SeatBack.png" alt="Seat Background" width="300" />
+   <img src="client/src/assets/footerBack.png" alt="Footer Background" width="300" />
+</p>
 
 You can use these images for documentation, UI, or branding purposes.
 
