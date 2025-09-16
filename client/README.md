@@ -1,19 +1,6 @@
-
-<p align="center">
-   <img src="client/src/assets/logo.png" alt="ApnaShow Logo" width="120" />
-</p>
-
 # ApnaShow Movie Web
 
 A modern movie web application built with React and Vite. This project allows users to browse movies, view trailers, book seats, and manage favorites.
-
-<p align="center">
-   <img src="client/src/assets/hero.jpg" alt="Hero Banner" width="400" />
-</p>
-
-<p align="center">
-   <img src="client/src/assets/screenImage.svg" alt="App Screenshot" width="400" />
-</p>
 
 ## Features
 - Browse movies and view details
@@ -73,23 +60,6 @@ server/           # Backend (if implemented)
 
 ## License
 This project is licensed under the MIT License.
-
-
-## Image Assets
-
-Below are all PNG images used in the project (located in `client/src/assets/`):
-
-```
-homeBack.png
-bookingBack.png
-movieDBack.png
-moviedetilsBack.png
-SignUp.png
-SeatBack.png
-footerBack.png
-```
-
-You can use these images for documentation, UI, or branding purposes.
 
 ## Contact
 Created by Kamlesh Kumawat. For questions, open an issue or contact via GitHub.
