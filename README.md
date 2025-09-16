@@ -85,7 +85,7 @@ Below are all PNG images used in the project (located in `client/src/assets/`):
    <img src="client/src/assets/bookingBack.png" alt="Booking Background" width="300" />
    <img src="client/src/assets/movieDBack.png" alt="Movie Details Background" width="300" />
    <img src="client/src/assets/moviedetilsBack.png" alt="Movie Details Back" width="300" />
-   <img src="client/src/assets/SignUp.png" alt="Sign Up" width="300" />
+   <img src="client/src/assets/SignUpBack.png" alt="Sign Up" width="300" />
    <img src="client/src/assets/SeatBack.png" alt="Seat Background" width="300" />
    <img src="client/src/assets/footerBack.png" alt="Footer Background" width="300" />
 </p>
