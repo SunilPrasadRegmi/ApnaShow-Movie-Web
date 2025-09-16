@@ -4,6 +4,7 @@ import Loading from '../../components/Loading';
 import Title from '../../components/admin/Title';
 import { CheckIcon, DeleteIcon, StarIcon } from 'lucide-react';
 import { kConverter } from '../../lib/kConverter';
+import axios from '../../config/axios';
 
 const AddShow = () => {
   const currency = import.meta.env.VITE_CURRENCY
@@ -13,8 +14,45 @@ const AddShow = () => {
   const [dateTimeInput, setDateTimeInput] = useState("");
   const [showPrice, setShowPrice] = useState("");
 
-  const fetchNowPlayingMovies = async () => {
-    setNowPlayingMovies(dummyShowsData)
+  // const fetchNowPlayingMovies = async () => {
+  //   setNowPlayingMovies(dummyShowsData)
+  //   try {
+  //     const token = localStorage.getItem('token');
+  //     const res = await axios.get('/movie',{
+  //       title: "now playing"
+  //     },{
+  //       headers: {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     });
+  //     // setNowPlayingMovies(res.data.data);
+  //     console.log(res.data.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  const handleMovieSelect = async () => {
+    if(!selectedMovie) {
+      console.log("No movie selected");
+      return;
+    }
+  
+    // console.log(showPrice);
+    // console.log(dateTimeSelection);
+    try {
+      await axios.post('/add',{
+      showPrice,
+      movieID: "tt3896198",
+      showsInput:dateTimeSelection
+    },{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleDateTimeAdd = () => {
@@ -45,9 +83,10 @@ const AddShow = () => {
     })
   }
 
-  useEffect(()=>{
-    fetchNowPlayingMovies()
-  }, [])
+  // useEffect(()=>{
+  //   fetchNowPlayingMovies()
+  // }, [])
+  
   return nowPlayingMovies.length > 0 ? (
     <>
      <Title text1="Add" text2="Shows"/>
@@ -116,7 +155,7 @@ const AddShow = () => {
           </ul>
         </div>
       )}
-      <button className='bg-primary text-white px-8 py-2 mt-6 rounded hover:bg-primary/90 transition-all cursor-pointer'>Add Show</button>
+      <button onClick={handleMovieSelect} className='bg-primary text-white px-8 py-2 mt-6 rounded hover:bg-primary/90 transition-all cursor-pointer'>Add Show</button>
     </>
   ) : <Loading/>
 }
