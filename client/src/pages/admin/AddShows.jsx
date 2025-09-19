@@ -14,23 +14,23 @@ const AddShow = () => {
   const [dateTimeInput, setDateTimeInput] = useState("");
   const [showPrice, setShowPrice] = useState("");
 
-  // const fetchNowPlayingMovies = async () => {
-  //   setNowPlayingMovies(dummyShowsData)
-  //   try {
-  //     const token = localStorage.getItem('token');
-  //     const res = await axios.get('/movie',{
-  //       title: "now playing"
-  //     },{
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     });
-  //     // setNowPlayingMovies(res.data.data);
-  //     console.log(res.data.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  const fetchNowPlayingMovies = async () => {
+    setNowPlayingMovies(dummyShowsData)
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.get('/movie',{
+        title: "now playing"
+      },{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      // setNowPlayingMovies(res.data.data);
+      console.log(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleMovieSelect = async () => {
     if(!selectedMovie) {
@@ -83,9 +83,9 @@ const AddShow = () => {
     })
   }
 
-  // useEffect(()=>{
-  //   fetchNowPlayingMovies()
-  // }, [])
+  useEffect(()=>{
+    fetchNowPlayingMovies()
+  }, [])
   
   return nowPlayingMovies.length > 0 ? (
     <>

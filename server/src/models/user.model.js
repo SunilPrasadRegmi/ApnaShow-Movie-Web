@@ -30,6 +30,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    favoriteMovies: {
+        type: [String],
+        default: [],
+        ref: "movie"
+    },
+    isDisabled: {
+        type: Boolean,
+        default: false
+    },
     lastActive: {
         type: Date,
         default: Date.now

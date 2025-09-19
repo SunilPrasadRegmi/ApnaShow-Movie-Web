@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema({
-    user:{type: String, required: true, ref: 'user'},
+    user:{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'user'},
     show:{type: String, required: true, ref: 'show'},
     amount:{type: Number, required: true},
     bookedSeats:{type: Array, required: true},

@@ -9,6 +9,7 @@ import userRoutes from './routes/user.route.js';
 import showRoutes from './routes/movie.route.js';
 import bookingRoutes from './routes/booking.route.js';
 import adminRoutes from './routes/admin.route.js';
+import userDetailsRouter from './routes/userRoute.js';
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/api/v1/', userRoutes);
 app.use('/api/v1/', showRoutes);
 app.use('/api/v1/booking', bookingRoutes);
 app.use('/api/v1/admin', adminRoutes);
+app.use('/api/v1/', userDetailsRouter);
 
 
 app.get('/health', (req, res) => {

@@ -40,11 +40,11 @@ const movieSchema = new mongoose.Schema({
         required: true
     },
     runtime: {
-        type: String,
+        type: Number,
         required: true
     },
     vote_average: {
-        type: String,
+        type: Number,
         required: true
     },
     // vote_count: {

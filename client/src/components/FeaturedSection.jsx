@@ -2,10 +2,28 @@ import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import BlurCircle from "./BlurCircle";
 import MovieCard from "./MovieCard";
-import {dummyShowsData} from "../assets/assets";
+// import {dummyShowsData} from "../assets/assets";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "../config/axios";
 
 const FeaturedSection = () => {
   const navigate = useNavigate();
+   const [data, setData] = useState([]);
+  const getNowPlayingMovies = async() => {
+    try {
+      const res = await axios.get('/all');
+      setData(res.data.data);
+      // console.log(res.data.data);
+      // console.log(dummyShowsData);
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getNowPlayingMovies();
+  }, []);
   return (
     <div className="px-6 md:px-16 lg:px-24 xl:px-44 overflow-hidden">
       <div className="relative flex items-center justify-between pt-20 pb-10">
@@ -21,10 +39,9 @@ const FeaturedSection = () => {
       </div>
 
       <div className="flex flex-wrap max-sm:justify-center gap-8 mt-8">
-        {dummyShowsData.slice(0, 4).map((show) => (
+        {data.slice(0, 4).map((show) => (
             <MovieCard key={show._id} movie={show} />
         ))}
-
       </div>
 
       <div className="flex justify-center mt-20">

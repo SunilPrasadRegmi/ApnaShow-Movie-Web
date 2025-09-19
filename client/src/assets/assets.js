@@ -293,10 +293,10 @@ export const dummyDashboardData = {
 export const dummyBookingData = [
     {
         "_id": "68396334fb83252d82e17295",
-        "user": { "name": "GreatStack", },
+        "user": { "name": "nana", },
         "show": {
-            _id: "68352363e96d99513e4221a4",
-            movie: dummyShowsData[0],
+            _id: "68c93290f12c3ceed757a941",
+            movie: "tt3896198",
             showDateTime: "2025-06-30T02:30:00.000Z",
             showPrice: 59,
         },

@@ -21,7 +21,7 @@ export const getNowPlayingMovies = async (req,res) => {
         // const res = await axios.get(`${BASE_URL}/?apikey=${API_KEY}&t=${encodeURIComponent(title)}`)
         const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&t=${title}`)
         // const res = await axios.get(`https://api.tvmaze.com/shows/2`);
-        console.log(response.data);
+        // console.log(response.data);
         const data = response.data;
         res.status(200).json({success: true, message: 'Movies fetched successfully', data});
     } catch(error) {
@@ -49,6 +49,7 @@ export const createMovieShow = async (req, res) => {
             ]);
 
             const movieDetails = movieDetailsResponse.data;
+            // console.log(movieDetails)
 
             const movieDetailsModel = {
                 title: movieDetails.Title,
@@ -57,13 +58,14 @@ export const createMovieShow = async (req, res) => {
                 backdrop_path: movieDetails.Poster,
                 original_language: movieDetails.Language,
                 overview: movieDetails.Plot,
-                vote_average: movieDetails.Ratings[0].Value,
-                runtime: movieDetails.Runtime,
+                vote_average: Number(parseFloat(movieDetails.Ratings[0].Value.match(/[\d.]+/)[0])),
+                runtime: Number(parseInt(movieDetails.Runtime, 10)),
                 genres: movieDetails.Genre, //.map(genre => genre.name)
                 cast: movieDetails.Actors, //.map(actor => actor.name)
                  _id: movieDetails.imdbID,
             }
 
+            // console.log(movieDetailsModel);
             // Create a new movie
             movie = await movieModel.create(movieDetailsModel);
         }

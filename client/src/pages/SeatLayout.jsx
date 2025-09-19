@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { assets, dummyDateTimeData, dummyShowsData } from "../assets/assets";
+import { assets } from "../assets/assets"; //dummyDateTimeData, dummyShowsData
 import Loading from "../components/Loading";
 import { ArrowRightIcon, ClockIcon, Group } from "lucide-react";
 import isoTimeFormat from "../lib/isoTimeFormat";
 import BlurCircle from "../components/BlurCircle";
 import toast from "react-hot-toast";
+import axios from "../config/axios";
 
 const SeatLayout = () => {
   const groupRows = [
@@ -26,13 +27,28 @@ const SeatLayout = () => {
   const navigate = useNavigate();
 
   const getShow = async () => {
-    const show = dummyShowsData.find((show) => show._id === id);
-    if (show) {
-      setShow({
-        movie: show,
-        dateTime: dummyDateTimeData,
-      });
-    }
+    // const show = dummyShowsData.find((show) => show._id === id);
+    // if (show) {
+    //   setShow({
+    //     movie: show,
+    //     dateTime: dummyDateTimeData,
+    //   });
+    // }
+
+    try{
+        const res = await axios.get(`/show/${id}`,{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        // console.log(res.data);
+        setShow({
+          movie: res.data.movie,
+          dateTime: res.data.dateTime
+        });
+      } catch (error) {
+        console.log(error);
+      }
   };
 
   const handleSeatClick = (seatId) => {
@@ -51,6 +67,48 @@ const SeatLayout = () => {
     );
   };
 
+  const getSeatsData = async () =>{
+      try {
+        const res = await axios.get(`booking/seats/${selectedTime.showId}`,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      // console.log(res.data);
+      setSelectedseats(res.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+  }
+
+  const bookTickets = async () => {
+    try {
+      const res = await axios.post(`/booking/create`,{
+        showId: selectedTime.showId,
+        selectedSeats,
+      },{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      // console.log(res.data);
+      if(res.data.success === true) {
+        toast.success(res.data.message);
+        navigate('/my-bookings');
+      }
+    } catch(error) {
+      console.log(error);
+    }
+
+  }
+
+
+  useEffect(() => {
+    if(selectedTime){
+      getSeatsData();
+    }
+  }, [selectedTime])
+
   const renderSeats = (row, count = 9) => {
     return (
       <div key={row} className="flex gap-2 mt-2">
@@ -62,7 +120,7 @@ const SeatLayout = () => {
                 key={searId}
                 onClick={() => handleSeatClick(searId)}
                 className={`h-8 w-8 rounded border border-primary/60 cursor-pointer ${
-                  selectedSeats.includes(searId) && "bg-primary text-white"
+                   selectedSeats.includes(searId) && "bg-primary text-white"
                 }`}
               >
                 {searId}
@@ -76,7 +134,7 @@ const SeatLayout = () => {
 
   useEffect(() => {
     getShow();
-  }, [id]);
+  }, []);
 
   return show ? (
     <div className="flex flex-col md:flex-row px-6 md:px-16 lg:px-40 py-30 md:pt-50">
@@ -119,7 +177,7 @@ const SeatLayout = () => {
           </div>
         </div>
 
-        <button onClick={()=> navigate(`/my-bookings`)} className="flex items-center gap-1 mt-20 px-10 py-3 text-sm bg-primary hover:bg-primary-light transition rounded-full font-medium cursor-pointer active:scale-95">
+        <button onClick={bookTickets} className="flex items-center gap-1 mt-20 px-10 py-3 text-sm bg-primary hover:bg-primary-light transition rounded-full font-medium cursor-pointer active:scale-95">
           Proceed to checkout 
           <ArrowRightIcon strokeWidth={3} className="w-4 h-4" />
         </button>

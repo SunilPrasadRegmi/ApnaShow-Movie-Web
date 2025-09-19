@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/movie", userAuth , getNowPlayingMovies)
 router.post("/add", userAuth , createMovieShow)
-router.get("/all", userAuth , getShows)
-router.get("/:movieId", userAuth , getShow)
+router.get("/all" , getShows)
+router.get("/show/:movieId" , getShow)
 
 export default router
