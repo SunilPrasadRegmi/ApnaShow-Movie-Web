@@ -1,10 +1,11 @@
 import { ChartLineIcon, CircleDollarSignIcon, PlayCircleIcon, StarIcon, UsersIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
-import { dummyDashboardData } from '../../assets/assets';
+// import { dummyDashboardData } from '../../assets/assets';
 import Loading from '../../components/Loading';
 import Title from '../../components/admin/Title';
 import BlurCircle from '../../components/BlurCircle';
 import { dateFormat } from '../../lib/dateFormat';
+import axios from '../../config/axios';
 
 const Dashboard = () => {
 
@@ -27,8 +28,14 @@ const Dashboard = () => {
     ]
 
     const fetchDashboardData = async () => {
-        setDashboardData(dummyDashboardData);
+        try {
+        const res = await axios.get('/admin/dashboard');
+        // console.log(res.data); 
+        setDashboardData(res.data.dashboardData);
         setIsLoading(false);
+    }catch(error) {
+      console.log(error);
+    }
     }
 
     useEffect(()=>{

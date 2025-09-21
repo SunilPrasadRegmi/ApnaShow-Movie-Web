@@ -4,12 +4,20 @@ import MovieCard from '../components/MovieCard'
 import BlurCircle from '../components/BlurCircle'
 import axios from '../config/axios'
 import { useEffect } from 'react' 
+import { useNavigate } from 'react-router-dom'
 
 const Favorite = () => {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
+  
   const getNowPlayingMovies = async() => {
     try {
       const token = localStorage.getItem('token');
+      if(!token){
+        navigate('/Signin');
+        return;
+      }
+
       const res = await axios.get('/favorites',{
         headers: {
           Authorization: `Bearer ${token}`
@@ -32,8 +40,8 @@ const Favorite = () => {
       <BlurCircle bottom="50px" right="50px" />
       <h1 className='text-lg font-medium my-4 '>Your Favorite Movies</h1>
       <div className='flex flex-wrap max-sm:justify-center gap-8'>
-        {data.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+        {data.map((movie,index) => (
+          <MovieCard key={movie.id+index} movie={movie} />
         ))}
       </div>
     </div>

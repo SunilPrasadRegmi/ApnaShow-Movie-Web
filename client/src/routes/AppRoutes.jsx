@@ -32,7 +32,14 @@ const AppRoutes = () => {
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:id" element={<MovieDetails />} />
+        <Route
+          path="/movies/:id"
+          element={
+            <AuthUser>
+              <MovieDetails />
+            </AuthUser>
+          }
+        />
         <Route
           path="/movies/:id/:date"
           element={
@@ -49,7 +56,14 @@ const AppRoutes = () => {
             </AuthUser>
           }
         />
-        <Route path="/favorite" element={<Favorite />} />
+        <Route
+          path="/favorite"
+          element={
+            <AuthUser>
+              <Favorite />
+            </AuthUser>
+          }
+        />
         <Route
           path="/profile/:id/:action"
           element={
@@ -59,10 +73,38 @@ const AppRoutes = () => {
           }
         />
         <Route path="/admin/*" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="add-show" element={<AddShow />} />
-          <Route path="list-shows" element={<ListShows />} />
-          <Route path="list-bookings" element={<ListBookings />} />
+          <Route
+            index
+            element={
+              <AuthUser>
+                <Dashboard />
+              </AuthUser>
+            }
+          />
+          <Route
+            path="add-show"
+            element={
+              <AuthUser>
+                <AddShow />
+              </AuthUser>
+            }
+          />
+          <Route
+            path="list-shows"
+            element={
+              <AuthUser>
+                <ListShows />
+              </AuthUser>
+            }
+          />
+          <Route
+            path="list-bookings"
+            element={
+              <AuthUser>
+                <ListBookings />
+              </AuthUser>
+            }
+          />
         </Route>
       </Routes>
       {!isAdminRoute && <Footer />}

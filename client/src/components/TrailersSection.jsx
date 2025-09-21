@@ -13,13 +13,25 @@ const TrailersSection = () => {
       </p>
       <div className="relative mt-6">
         <BlurCircle top="-100px" right="-100px" />
-          <ReactPlayer
-            url={currentTrailer.videoUrl}
-            controls={true}
-            className="mx-auto max-w-full"
+          {/* <ReactPlayer
+            // url={currentTrailer.videoUrl}
+            url={"https://www.w3schools.com/html/mov_bbb.mp4"}
+            controls
+            // className="mx-auto max-w-full"
             width="960px"
             height="540px"
-          />
+          /> */}
+          <iframe
+        width="960"
+        height="540"
+        // src={'https://www.youtube.com/watch?v=WpW36ldAqnM'}
+        src="https://www.youtube.com/embed/WpW36ldAqnM"
+        title="YouTube video player"
+        className="mx-auto max-w-full"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        style={{ borderRadius: '12px' }}
+      ></iframe>
       </div>
 
       <div className="group grid grid-cols-4 gap-4 md:gap-8 mt-8 max-w-3xl mx-auto">

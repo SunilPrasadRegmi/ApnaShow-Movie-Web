@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { dummyShowsData } from '../../assets/assets';
+// import { dummyShowsData } from '../../assets/assets';
 import Loading from '../../components/Loading';
 import Title from '../../components/admin/Title';
 import { dateFormat } from '../../lib/dateFormat';
+import axios from '../../config/axios';
 
 const ListShows = () => {
     const currency = import.meta.env.VITE_CURRENCY
@@ -12,16 +13,19 @@ const ListShows = () => {
 
     const getAllShows = async () => {
         try {
-            setShows([{
-                movie: dummyShowsData[0],
-                showDateTime: "2025-06-30T02:30:00.000Z",
-                showPrice: 59,
-                occupiedSeats: {
-                    A1: "user_1",
-                    B1: "user_2",
-                    C1: "user_3",
-                }
-            }]);
+            const res = await axios.get('/admin/all-shows');
+            // console.log(res.data);
+            setShows(res.data.shows);
+            // setShows([{
+            //     movie: dummyShowsData[0],
+            //     showDateTime: "2025-06-30T02:30:00.000Z",
+            //     showPrice: 59,
+            //     occupiedSeats: {
+            //         A1: "user_1",
+            //         B1: "user_2",
+            //         C1: "user_3",
+            //     }
+            // }]);
             setLoading(false);
         } catch (error) {
             console.error(error);   

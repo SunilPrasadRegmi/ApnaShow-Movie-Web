@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
-import { dummyBookingData } from "../../assets/assets";
+// import { dummyBookingData } from "../../assets/assets";
 import Title from "../../components/admin/Title";
 import { dateFormat } from "../../lib/dateFormat";
+import axios from "../../config/axios";
 
 const ListBookings = () => {
   const currency = import.meta.env.VITE_CURRENCY;
@@ -10,8 +11,14 @@ const ListBookings = () => {
   const [loading, setLoading] = useState(true);
 
   const getAllBookings = async () => {
-    setBookings(dummyBookingData);
-    setLoading(false);
+    try {
+      const res = await axios.get('/admin/all-bookings');
+      // console.log(res.data); 
+      setBookings(res.data.bookings);
+      setLoading(false);
+    }catch(error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

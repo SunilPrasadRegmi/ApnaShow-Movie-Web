@@ -26,7 +26,7 @@ const MovieDetails = () => {
     //   }
       try {
         const token = localStorage.getItem('token');
-        if(token){
+        if(!token){
           return;
         }
         const res = await axios.get(`/show/${id}`,{
@@ -34,7 +34,7 @@ const MovieDetails = () => {
             Authorization: `Bearer ${token}`
           }
         });
-        console.log(res.data);
+        // console.log(res.data);
         setShow({
           movie: res.data.movie,
           dateTime: res.data.dateTime
@@ -46,9 +46,14 @@ const MovieDetails = () => {
     
   const getHandleFavorite = async() => {
     try {
+      const token = localStorage.getItem('token');
+      if(!token){
+        navigate('/Signin');
+        return;
+      }
       const res = await axios.get(`/favorites`,{
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${token}`
       }
     });
     // console.log(res.data);
@@ -105,8 +110,8 @@ const MovieDetails = () => {
   }, [id])
 
   useEffect(() => {
-    getHandleFavorite();
      getNowPlayingMovies();
+      getHandleFavorite();
   },[])
   return show ? (
     <div className='px-6 md:px-16 lg:px-40 pt-30 md:pt-50'>

@@ -7,7 +7,7 @@
 
 A modern movie web application built with React and Vite. This project allows users to browse movies, view trailers, book seats, and manage favorites.
 
-<p align="center">
+<p align="Started">
    <img src="client/src/assets/backgroundImage.png" alt="Hero Banner" width="400" />
 </p>
 
@@ -86,8 +86,8 @@ Below are all PNG images used in the project (located in `client/src/assets/`):
    <img src="client/src/assets/movieDBack.png" alt="Movie Details Background" width="300" />
    <img src="client/src/assets/moviedetilsBack.png" alt="Movie Details Back" width="300" />
    <img src="client/src/assets/SignUpBack.png" alt="Sign Up" width="300" />
-   <img src="client/src/assets/SeatBack.png" alt="Seat Background" width="300" />
    <img src="client/src/assets/footerBack.png" alt="Footer Background" width="300" />
+   <img src="client/src/assets/seatBack.png" alt="Seat Background" width="300" />
 </p>
 
 You can use these images for documentation, UI, or branding purposes.

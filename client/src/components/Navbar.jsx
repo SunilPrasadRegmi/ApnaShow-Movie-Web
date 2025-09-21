@@ -49,7 +49,7 @@ const Navbar = () => {
           Movies
         </Link>
         <Link
-          to="/"
+          to="#"
           onClick={() => {
             scrollTo(0, 0); setIsOpen(false);
           }}
@@ -57,7 +57,7 @@ const Navbar = () => {
           Theaters
         </Link>
         <Link
-          to="/my-bookings"
+          to="#"
           onClick={() => {
             scrollTo(0, 0); setIsOpen(false);
           }}

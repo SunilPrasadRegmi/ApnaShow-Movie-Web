@@ -5,6 +5,7 @@ import Title from '../../components/admin/Title';
 import { CheckIcon, DeleteIcon, StarIcon } from 'lucide-react';
 import { kConverter } from '../../lib/kConverter';
 import axios from '../../config/axios';
+import { useNavigate } from 'react-router-dom';
 
 const AddShow = () => {
   const currency = import.meta.env.VITE_CURRENCY
@@ -13,11 +14,16 @@ const AddShow = () => {
   const [dateTimeSelection, setDateTimeSelection] = useState("");
   const [dateTimeInput, setDateTimeInput] = useState("");
   const [showPrice, setShowPrice] = useState("");
+  const navigate = useNavigate();
 
   const fetchNowPlayingMovies = async () => {
     setNowPlayingMovies(dummyShowsData)
     try {
       const token = localStorage.getItem('token');
+      if(!token){
+        navigate('/Signin');
+        return;
+      }
       const res = await axios.get('/movie',{
         title: "now playing"
       },{
@@ -41,13 +47,18 @@ const AddShow = () => {
     // console.log(showPrice);
     // console.log(dateTimeSelection);
     try {
+      const token = localStorage.getItem('token');
+      if(!token){
+        navigate('/Signin');
+        return;
+      }
       await axios.post('/add',{
       showPrice,
       movieID: "tt3896198",
       showsInput:dateTimeSelection
     },{
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${token}`
       }
     });
     } catch (error) {
